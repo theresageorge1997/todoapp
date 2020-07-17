@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
   }
   loginUser(): void{
     this.success = this.auth.loginUser(this.loginUserData);
-    console.log(this.success);
     if (this.success != null)
     {
       localStorage.setItem('token', this.success);

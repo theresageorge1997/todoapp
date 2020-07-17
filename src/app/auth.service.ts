@@ -21,10 +21,9 @@ export class AuthService {
        {
          return this.userList[i];
        }
-       return null;
       }
-      return null;
     }
+    return null;
   }
   loggedIn(): any{
     return !!localStorage.getItem('token');

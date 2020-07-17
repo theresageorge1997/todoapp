@@ -21,7 +21,6 @@ registered: any;
   }
   registerUser(): void {
     this.registered = this.auth.registerUser(this.registerUserData);
-    console.log(this.registered);
     localStorage.setItem('token', this.registered);
     this.router.navigate(['/special']);
   }
