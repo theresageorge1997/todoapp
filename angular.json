@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "auth-todo"
+    }
+  },
+  "defaultProject": "auth-todo",
+  "cli": {
+    "analytics": false
+  }
 }

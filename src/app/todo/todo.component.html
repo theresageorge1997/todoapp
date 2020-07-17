@@ -1,0 +1,58 @@
+<body>
+
+    <div [hidden]="!showEdit">
+      <span><input [(ngModel)]="listName" name="listName"></span>
+      <span (click)="hide()" class="glyphicon glyphicon-ok"></span>
+    </div>
+    
+    <div  class="todos">
+    <div  (change)="counter()" >
+      <span><h1>{{listName|titlecase}}</h1></span>
+      <span (click)="show()" class="glyphicon glyphicon-edit"></span>
+    
+      <h4>{{count}}/{{totalItems}} items completed</h4>
+    
+         <div  class="checkbox">
+            <ul id="sortable" class="list-unstyled">
+              <li [hidden]="todo.completed" class="ui-state-default" *ngFor="let todo of todos; let i=index">
+                
+              <input  type="checkbox" class="checkbox" [(ngModel)]="todo.completed" />
+              <span class="left" [ngClass]="{'checked1': todo.completed}"><b>{{ todo.newTodo }}</b></span>
+              &nbsp;
+              <span class="right" (click)="deleteTodo(i)" class="btn btn-secondary btn-circle btn-sm"><b>X</b></span>
+              </li>
+            </ul>
+         </div>
+    
+         <div>
+            <form (submit)="addTodo($event)">
+            <input [(ngModel)]="newTodo"  name="newTodo">
+            &nbsp;    &nbsp;    &nbsp;
+            <button  class="btn btn btn-secondary" type="submit" >Add new</button>
+            </form>
+         </div>
+      
+         <div [hidden]="newTodo">
+            Type in a new todo...
+         </div>
+      
+         <div [hidden]="!newTodo">
+            Typing: {{ newTodo }}
+         </div>
+    
+         <h4>{{count}} Completed Items</h4>
+    
+         <div class="checkbox">
+          <ul id="sortable" class="list-unstyled">
+            <li [hidden]="!todo.completed" class="ui-state-default" *ngFor="let todo of todos; let i=index">
+            <input type="checkbox" class="checkbox" [(ngModel)]="todo.completed" />
+            <span [ngClass]="{'checked1': todo.completed}"><b>{{ todo.newTodo }}</b></span>
+            </li>
+          </ul>
+         </div>
+    
+    </div>
+    
+    </div>
+    
+    </body>
