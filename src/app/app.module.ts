@@ -6,21 +6,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { TodoComponent } from './todos/todo/todo.component';
-import { AuthService } from './auth.service';
-import { AuthGuard } from './auth.guard';
+import { TodosModule } from './todos/todos.module';
+
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './services/auth.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
-    TodoComponent
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    TodosModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
