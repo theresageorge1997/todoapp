@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { TodoComponent } from './todo/todo.component';
+import { TodoComponent } from './todos/todo/todo.component';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 
