@@ -10,6 +10,15 @@ import { TodosModule } from './todos/todos.module';
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth.guard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import {MatButtonModule } from '@angular/material/button';
+import {MatToolbarModule } from '@angular/material/toolbar';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +30,14 @@ import { AuthGuard } from './services/auth.guard';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    TodosModule
+    TodosModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    MatListModule,
+    MatCardModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatFormFieldModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
