@@ -1,14 +1,29 @@
-
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-     <span><a href="/special">Todo</a></span>
-     <span fxFlex fxLayoutAlign="end center" ></span>
+     <span><mat-icon (click)="opened=!opened">menu</mat-icon>
+      <a href="/special">Todo</a></span>
+     <span fxFlex fxLayoutAlign="end center" >
      <a  mat-button routerLink="/special" routerLinkActive="active"> Create Todo</a>
      <a  mat-button  *ngIf="!auth.loggedIn()" routerLink="/register" routerLinkActive="active">Register</a>
      <a  mat-button  *ngIf="!auth.loggedIn()" routerLink="/login" routerLinkActive="active">Login</a>
      <a  mat-button  *ngIf="auth.loggedIn()" (click)="auth.logoutUser()" routerLink="/login" routerLinkActive="active">Logout</a>
-  </mat-toolbar-row>
+    </span>
+    </mat-toolbar-row>
 </mat-toolbar>
 
 
-<router-outlet></router-outlet>  
+ 
+<mat-sidenav-container>
+  <mat-sidenav  mode="over" [(opened)]="opened">
+    <span fxLayout="column">
+      
+      <a  mat-button routerLink="/special" routerLinkActive="active"> Create Todo</a>
+      <a  mat-button   routerLink="/about" routerLinkActive="active">About</a>
+      <a  mat-button   routerLink="/contact" routerLinkActive="active">Contact</a>
+   
+     </span>
+
+  </mat-sidenav>
+  <mat-sidenav-content><router-outlet></router-outlet></mat-sidenav-content>
+
+</mat-sidenav-container>

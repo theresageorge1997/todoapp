@@ -9,12 +9,14 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
+import { MatInputModule } from '@angular/material/input';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 
 @NgModule({
-  declarations: [TodoComponent],
+  declarations: [TodoComponent, AboutComponent, ContactComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -24,7 +26,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatListModule,
     MatCardModule,
     MatFormFieldModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatInputModule
   ]
 })
 export class TodosModule { }

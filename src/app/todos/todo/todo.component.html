@@ -7,7 +7,9 @@
    </div>
 
    <div [hidden]="!showEdit" fxLayout="row" fxLayoutAlign="center center">
+      <mat-form-field>
       <input type="text" [(ngModel)]="listName" name="listName" matInput/>
+   </mat-form-field>
       <mat-icon (click)="hide()">done</mat-icon>
    </div>
 
@@ -15,12 +17,12 @@
    
    <div fxLayout="row" fxLayoutAlign="center center" class="mat-card-subtitle">{{count}}/{{totalItems}} items completed</div>
 
-   <div (change)="counter()">
+   <div>
       <div >
          <mat-list>
            <mat-list-item [hidden]="todo.completed"  *ngFor="let todo of todos; let i=index"> 
             <div fxLayout="row" fxFlexFill>
-             <div fxFlex fxLayoutAlign="start center"><input  type="checkbox"  [(ngModel)]="todo.completed" /></div>
+             <div fxFlex fxLayoutAlign="start center"><mat-checkbox  [(ngModel)]="todo.completed" color="primary" (change)="counter()"></mat-checkbox></div>
              <div fxFlex fxLayoutAlign="center center"  [ngClass]="{'checked1': todo.completed}">{{ todo.newTodo }}</div>
              <div fxFlex fxLayoutAlign="end center"  (click)="deleteTodo(i)"><mat-icon matListIcon>delete_outline</mat-icon></div>
             </div>
@@ -30,8 +32,11 @@
 
       <div>
          <form (submit)="addTodo($event)">
-            <input type="text" [(ngModel)]="newTodo"  name="newTodo"  /> &nbsp;
+            <mat-form-field>
+            <input type="text" placeholder="Enter to do item" [(ngModel)]="newTodo"  name="newTodo" matInput /> 
+            </mat-form-field>
             <button mat-raised-button color="primary" type="submit">Add new</button>
+         
          </form>
       </div>
      
@@ -50,7 +55,7 @@
       <div>
          <mat-list>
             <mat-list-item [hidden]="!todo.completed"  *ngFor="let todo of todos; let i=index">
-               <mat-checkbox  [(ngModel)]="todo.completed" color="primary">
+               <mat-checkbox  [(ngModel)]="todo.completed" color="primary" (change)="counter()">
                   <span [ngClass]="{'checked1': todo.completed}">{{ todo.newTodo }}</span>
                </mat-checkbox>
             </mat-list-item>

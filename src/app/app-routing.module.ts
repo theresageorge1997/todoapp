@@ -4,6 +4,8 @@ import { TodoComponent } from './todos/todo/todo.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './services/auth.guard';
+import { AboutComponent } from './todos/about/about.component';
+import { ContactComponent } from './todos/contact/contact.component';
 
 const routes: Routes = [
   {
@@ -23,7 +25,16 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'about',
+    component: AboutComponent
+  },
+  {
+    path: 'contact',
+    component: ContactComponent
   }
+
 ];
 
 @NgModule({

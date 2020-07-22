@@ -18,6 +18,9 @@ import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule } from '@angular/material/button';
 import {MatToolbarModule } from '@angular/material/toolbar';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -37,7 +40,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatSidenavModule,
+    MatIconModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

@@ -47,7 +47,6 @@ export class TodoComponent implements OnInit {
     for (let i = (this.todos.length - 1); i > -1; i--) {
       if (this.todos[i].completed) {
         this.count = this.count + 1;
-        this.totalItems = this.todos.length;
       }
     }
   }
