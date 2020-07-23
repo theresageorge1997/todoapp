@@ -8,7 +8,6 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'auth-todo';
-  opened = false;
   constructor(public auth: AuthService) {
    }
 }

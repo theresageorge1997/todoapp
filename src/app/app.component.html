@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-     <span><mat-icon (click)="opened=!opened">menu</mat-icon>
+     <span>
       <a href="/special">Todo</a></span>
      <span fxFlex fxLayoutAlign="end center" >
      <a  mat-button routerLink="/special" routerLinkActive="active"> Create Todo</a>
@@ -14,7 +14,7 @@
 
  
 <mat-sidenav-container>
-  <mat-sidenav  mode="over" [(opened)]="opened">
+  <mat-sidenav  mode="side" opened>
     <span fxLayout="column">
       
       <a  mat-button routerLink="/special" routerLinkActive="active"> Create Todo</a>

@@ -1,4 +1,4 @@
-<div class="container" fxLayout="column"  fxLayoutAlign="center center">
+<div class="container" fxLayout="column">
 <mat-card>
 
    <div fxLayout="row" fxLayoutAlign="center center">
@@ -17,8 +17,8 @@
    
    <div fxLayout="row" fxLayoutAlign="center center" class="mat-card-subtitle">{{count}}/{{totalItems}} items completed</div>
 
-   <div>
-      <div >
+   <div fxLayout="column">
+      <div>
          <mat-list>
            <mat-list-item [hidden]="todo.completed"  *ngFor="let todo of todos; let i=index"> 
             <div fxLayout="row" fxFlexFill>
@@ -30,7 +30,7 @@
          </mat-list>
       </div>
 
-      <div>
+      <div fxLayoutAlign="center center">
          <form (submit)="addTodo($event)">
             <mat-form-field>
             <input type="text" placeholder="Enter to do item" [(ngModel)]="newTodo"  name="newTodo" matInput /> 
@@ -40,11 +40,11 @@
          </form>
       </div>
      
-      <div [hidden]="newTodo">
+      <div [hidden]="newTodo" fxLayoutAlign="center center">
          Type in a new todo...
       </div>
      
-      <div [hidden]="!newTodo">
+      <div [hidden]="!newTodo" fxLayoutAlign="center center">
          Typing: {{ newTodo }}
       </div>
       
@@ -52,7 +52,7 @@
    
       <div fxLayout="row" fxLayoutAlign="center center" class="mat-card-subtitle">{{count}} Completed Items</div>
    
-      <div>
+      <div fxLayoutAlign="center center">
          <mat-list>
             <mat-list-item [hidden]="!todo.completed"  *ngFor="let todo of todos; let i=index">
                <mat-checkbox  [(ngModel)]="todo.completed" color="primary" (change)="counter()">
