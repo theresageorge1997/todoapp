@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   registerUserData: any;
-registered: any;
+  registered: any;
 
   constructor(private auth: AuthService, private router: Router) {
     this.registerUserData = {
@@ -21,8 +21,13 @@ registered: any;
   }
   registerUser(): void {
     this.registered = this.auth.registerUser(this.registerUserData);
-    localStorage.setItem('token', this.registered);
+    this.registered.then((user) => {
+      if (user)
+    {
+    localStorage.setItem('token', user);
     this.router.navigate(['/special']);
+    }
+    });
   }
 
 }

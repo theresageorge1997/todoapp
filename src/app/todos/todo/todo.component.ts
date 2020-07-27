@@ -49,6 +49,7 @@ export class TodoComponent implements OnInit {
         this.count = this.count + 1;
       }
     }
+    console.log(this.todos);
   }
   show(): void{
     this.showEdit = true;

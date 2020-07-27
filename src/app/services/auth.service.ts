@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,23 +9,33 @@ export class AuthService {
 
   userList: any;
   success: any ;
-  constructor(private router: Router) {
+  constructor(private router: Router, private http: HttpClient) {
     this.userList = [];
-    this.success = null;
    }
   registerUser(user): any{
-    const len = this.userList.push(user);
-    return this.userList[len - 1];
+    const p = new Promise((resolve, reject) => {
+      this.http.post<{message: string, user}>('/todo/register', user)
+      .subscribe(response => {
+        if (response)
+        {
+          resolve(response.user);
+        }
+      });
+    });
+    return p;
   }
   loginUser(user): any{
-    this.userList.forEach(element => {
-      if ((element.email === user.email) && (element.password === user.password))
+    const p = new Promise((resolve, reject) => {
+    this.http.post<{message: string, user}>('/todo/login', user)
+    .subscribe(response => {
+      if (response)
       {
-        this.success = element;
+        resolve(response);
       }
     });
-    return this.success;
-  }
+  });
+    return p;
+}
   loggedIn(): any{
     return !!localStorage.getItem('token');
   }
