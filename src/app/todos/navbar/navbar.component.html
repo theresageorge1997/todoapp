@@ -1,0 +1,25 @@
+<mat-toolbar color="primary" >
+    <mat-toolbar-row>
+       <span>
+        <a routerLink="/special">Todo</a></span>
+       <span fxFlex fxLayoutAlign="end center" >
+       <a  mat-button routerLink="/special" routerLinkActive="active"> Create Todo</a>
+       <a mat-button routerLink="/contact" routerLinkActive="active">Contact</a>
+       <a mat-button routerLink="/about" routerLinkActive="active">About</a>
+       <a  mat-button  (click)="auth.logoutUser()" routerLinkActive="active">Logout</a>
+      </span>
+      </mat-toolbar-row>
+  </mat-toolbar>
+  
+  
+<mat-sidenav-container>
+    <mat-sidenav opened mode="over" >
+        <div fxLayout="column">
+      
+            <a  mat-stroked-button routerLink="/special" routerLinkActive="active"> Create Todo</a>
+            <a  mat-stroked-button   routerLink="/about" routerLinkActive="active">About</a>
+            <a  mat-stroked-button   routerLink="/contact" routerLinkActive="active">Contact</a>
+         
+        </div>
+    </mat-sidenav>
+  </mat-sidenav-container>

@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   }
   loginUser(): void{
     this.success = this.auth.loginUser(this.loginUserData);
-    if (this.success != null)
+    if (this.success)
     {
       localStorage.setItem('token', this.success);
       this.router.navigate(['/special']);

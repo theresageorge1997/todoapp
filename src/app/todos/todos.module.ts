@@ -12,11 +12,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
-
+import { NavbarComponent } from './navbar/navbar.component';
+import { MatSidenavModule} from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { TodosRoutingModule } from './todos-routing.module';
 
 
 @NgModule({
-  declarations: [TodoComponent, AboutComponent, ContactComponent],
+  declarations: [TodoComponent, AboutComponent, ContactComponent, NavbarComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -27,7 +30,10 @@ import { ContactComponent } from './contact/contact.component';
     MatCardModule,
     MatFormFieldModule,
     MatCheckboxModule,
-    MatInputModule
+    MatInputModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    TodosRoutingModule
   ]
 })
 export class TodosModule { }

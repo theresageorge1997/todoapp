@@ -16,8 +16,10 @@
          </mat-form-field>
       </form>
    </mat-card-content>
-   <mat-card-actions  fxLayoutAlign="center center">
-      <button  mat-raised-button  color="primary" type="submit" (click)="loginUser()">LOGIN</button>
+   <mat-card-actions  fxLayout="column" fxLayoutAlign="center center">
+      <button  mat-raised-button  color="primary" type="submit" (click)="loginUser()">LOGIN</button><br>
+      <mat-card-subtitle>Create a new account</mat-card-subtitle>
+      <a mat-flat-button routerLink="/register" routerLinkActive="active">Sign up</a>
    </mat-card-actions>
 </mat-card>
 </div>

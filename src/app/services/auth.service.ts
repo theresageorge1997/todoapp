@@ -7,23 +7,23 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   userList: any;
+  success: any ;
   constructor(private router: Router) {
     this.userList = [];
+    this.success = null;
    }
   registerUser(user): any{
     const len = this.userList.push(user);
     return this.userList[len - 1];
   }
   loginUser(user): any{
-    for (let i = (this.userList.length - 1); i > -1; i--) {
-      if (this.userList[i].email === user.email) {
-       if (this.userList[i].password === user.password)
-       {
-         return this.userList[i];
-       }
+    this.userList.forEach(element => {
+      if ((element.email === user.email) && (element.password === user.password))
+      {
+        this.success = element;
       }
-    }
-    return null;
+    });
+    return this.success;
   }
   loggedIn(): any{
     return !!localStorage.getItem('token');
