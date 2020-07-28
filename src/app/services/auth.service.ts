@@ -30,7 +30,7 @@ export class AuthService {
     .subscribe(response => {
       if (response)
       {
-        resolve(response);
+        resolve(response.user);
       }
     });
   });

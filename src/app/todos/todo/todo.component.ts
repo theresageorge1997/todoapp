@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TodoService } from '../services/todo.service';
 
 @Component({
   selector: 'app-todo',
@@ -15,9 +16,12 @@ export class TodoComponent implements OnInit {
   listName: string;
   showEdit: boolean;
 
-  constructor() {
+  constructor(private todo: TodoService) {
   this.newTodo = '';
-  this.todos = [];
+  this.todo.getTodo()
+  .subscribe(response => {
+    this.todos =  response.todo;
+  });
   this.count = 0;
   this.totalItems = 0;
   this.listName = 'my todo list';
@@ -28,28 +32,40 @@ export class TodoComponent implements OnInit {
   }
   addTodo(event): void {
     this.todoObj = {
+      id: '',
       newTodo: this.newTodo,
       completed: false
     };
-    this.todos.push(this.todoObj);
-    this.newTodo = '';
-    this.totalItems = this.todos.length;
-    event.preventDefault();
+    this.todo.addTodo(this.todoObj)
+    .subscribe(response => {
+      this.todos = response.todo;
+      console.log(this.todos);
+      this.newTodo = '';
+      this.totalItems = this.todos.length;
+     });
   }
 
-  deleteTodo(index): void {
-    this.todos.splice(index, 1);
-    this.totalItems = this.todos.length;
+  deleteTodo(id): void {
+    this.todo.deleteTodo(id)
+    .subscribe(response => {
+      this.todos = response.todo;
+      this.totalItems = this.todos.length;
+      console.log(this.todos);
+     });
   }
 
-  counter(): void{
+  counter(todo, id): void{
     this.count = 0;
-    for (let i = (this.todos.length - 1); i > -1; i--) {
-      if (this.todos[i].completed) {
-        this.count = this.count + 1;
-      }
-    }
-    console.log(this.todos);
+    this.todo.updateTodo(id, todo)
+       .subscribe((response) => {
+        this.todos = response.todo;
+        for (let i = (this.todos.length - 1); i > -1; i--) {
+          if (this.todos[i].completed) {
+            this.count = this.count + 1;
+          }
+        }
+        console.log(this.todos);
+       });
   }
   show(): void{
     this.showEdit = true;

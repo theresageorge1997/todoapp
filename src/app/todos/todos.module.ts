@@ -16,6 +16,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MatSidenavModule} from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { TodosRoutingModule } from './todos-routing.module';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { TodosRoutingModule } from './todos-routing.module';
     MatInputModule,
     MatSidenavModule,
     MatToolbarModule,
-    TodosRoutingModule
+    TodosRoutingModule,
+    HttpClientModule
   ]
 })
 export class TodosModule { }

@@ -23,7 +23,7 @@
          <mat-list>
            <mat-list-item [hidden]="todo.completed"  *ngFor="let todo of todos; let i=index"> 
             <div fxLayout="row" fxFlexFill>
-             <div fxFlex fxLayoutAlign="start center"><mat-checkbox  [(ngModel)]="todo.completed" color="primary" (change)="counter()"></mat-checkbox></div>
+             <div fxFlex fxLayoutAlign="start center"><mat-checkbox  [(ngModel)]="todo.completed" color="primary" (change)="counter(todo, i)"></mat-checkbox></div>
              <div fxFlex fxLayoutAlign="center center"  [ngClass]="{'checked1': todo.completed}">{{ todo.newTodo }}</div>
              <div fxFlex fxLayoutAlign="end center"  (click)="deleteTodo(i)"><mat-icon matListIcon>delete_outline</mat-icon></div>
             </div>
@@ -56,7 +56,7 @@
       <div fxLayoutAlign="center center">
          <mat-list>
             <mat-list-item [hidden]="!todo.completed"  *ngFor="let todo of todos; let i=index">
-               <mat-checkbox  [(ngModel)]="todo.completed" color="primary" (change)="counter()">
+               <mat-checkbox  [(ngModel)]="todo.completed" color="primary" (change)="counter(todo, i)">
                   <span [ngClass]="{'checked1': todo.completed}">{{ todo.newTodo }}</span>
                </mat-checkbox>
             </mat-list-item>
