@@ -15,6 +15,9 @@ export class TodoComponent implements OnInit {
   totalItems: number;
   listName: string;
   showEdit: boolean;
+  addSuccess: boolean;
+  deleteSuccess: boolean;
+  updateSuccess: boolean;
 
   constructor(private todo: TodoService) {
   this.newTodo = '';
@@ -32,31 +35,53 @@ export class TodoComponent implements OnInit {
   }
   addTodo(event): void {
     this.todoObj = {
-      id: '',
       newTodo: this.newTodo,
       completed: false
     };
     this.todo.addTodo(this.todoObj)
+    .subscribe(response => {
+      this.addSuccess = response.status;
+      console.log(this.addSuccess);
+    });
+    if (this.addSuccess)
+    {
+    this.todo.getTodo()
     .subscribe(response => {
       this.todos = response.todo;
       console.log(this.todos);
       this.newTodo = '';
       this.totalItems = this.todos.length;
      });
+    }
   }
 
   deleteTodo(id): void {
     this.todo.deleteTodo(id)
     .subscribe(response => {
+      this.deleteSuccess = response.status;
+      console.log(this.deleteSuccess);
+    });
+    if (this.deleteSuccess)
+    {
+    this.todo.getTodo()
+    .subscribe(response => {
       this.todos = response.todo;
       this.totalItems = this.todos.length;
       console.log(this.todos);
      });
+    }
   }
 
-  counter(todo, id): void{
+  counter(todo): void{
     this.count = 0;
-    this.todo.updateTodo(id, todo)
+    this.todo.updateTodo(todo)
+    .subscribe(response => {
+      this.updateSuccess = response.status;
+      console.log(this.updateSuccess);
+    });
+    if (this.updateSuccess)
+    {
+    this.todo.getTodo()
        .subscribe((response) => {
         this.todos = response.todo;
         for (let i = (this.todos.length - 1); i > -1; i--) {
@@ -66,6 +91,7 @@ export class TodoComponent implements OnInit {
         }
         console.log(this.todos);
        });
+      }
   }
   show(): void{
     this.showEdit = true;

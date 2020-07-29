@@ -1,8 +1,11 @@
 const express = require('express');
 const route = express.Router();
-var uniqid = require('uniqid');
+const mongo = require('mongodb').MongoClient;
+const assert = require('assert');
+const { ObjectId } = require('mongodb');
+
+var url='mongodb://localhost:27017/test';
 const users = [];
-const todos=[];
 route.post('/register',(req,res) => {
     users.push(req.body);
     return res.json({message: 'Login Successfull',user: users[users.length-1]});
@@ -20,22 +23,58 @@ route.post('/login',(req,res) => {
     
 });
 route.post('/add',(req,res) => {
-    req.body.id=uniqid();
-    todos.push(req.body);
-    return res.json({todo: todos});
+    mongo.connect(url,function(err,db){
+        assert.equal(null,err);
+        db.collection('todo').insertOne(req.body,function(err,result){
+            assert.equal(null,err);
+            console.log('Item Inserted');
+            db.close();
+            return res.json({status: true});
+        });
+    });
+  
 });
 route.delete('/delete/:id',(req,res) => {
-    const i=req.params.id;
-    todos.splice(i,1);
-        return res.json({todo:todos});
+    mongo.connect(url,function(err,db){
+        assert.equal(null,err);
+        db.collection('todo').deleteOne({"_id":ObjectId(req.params.id)},function(err,result){
+            assert.equal(null,err);
+            console.log('Item deleted');
+            db.close();
+            return res.json({status: true});
+        });
     });
-route.put('/update/:id',(req,res) =>{
-    const i = req.params.id;
-    todos[i]=req.body;
-    return res.json({todo:todos});
+});
+route.put('/update',(req,res) =>{
+    var item={
+        completed: req.body.completed
+    };
+    var id=req.body._id;
+
+   mongo.connect(url,function(err,db){
+        assert.equal(null,err);
+        db.collection('todo').updateOne({"_id":ObjectId(id)},{$set: item}, function(err,result){
+            assert.equal(null,err);
+            console.log('Item updated');
+            db.close();
+            return res.json({status: true});
+        });
+    });
     });
 route.get('/get',(req,res) =>{
-    return res.json({todo:todos});
+    var getdb=[];
+    mongo.connect(url,function(err,db){
+        assert.equal(null,err);
+        var cursor = db.collection('todo').find();
+        cursor.forEach(function(doc,err){
+            assert.equal(null,err);
+            getdb.push(doc);
+        }, function(){
+            db.close();
+            return res.json({todo:getdb});
+        })
+    });
+    
 });
         
 module.exports=route

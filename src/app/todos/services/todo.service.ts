@@ -8,13 +8,13 @@ export class TodoService {
 
   constructor(private http: HttpClient) { }
   addTodo(todo): any{
-    return this.http.post<{todo}>('todo/add', todo);
+    return this.http.post<{status}>('todo/add', todo);
   }
   deleteTodo(id): any{
-    return this.http.delete<{todo}>('/todo/delete/' + id);
+    return this.http.delete<{status}>('/todo/delete/' + id);
   }
-  updateTodo(id, todo): any{
-    return this.http.put<{todo}>('/todo/update/' + id, todo);
+  updateTodo(todo): any{
+    return this.http.put<{status}>('/todo/update', todo);
   }
   getTodo(): any{
     return this.http.get<{todo}>('/todo/get');
