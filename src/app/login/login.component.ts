@@ -11,7 +11,6 @@ export class LoginComponent implements OnInit {
 
   loginUserData: any;
   success: any;
-  msg: any;
   constructor(private auth: AuthService, private router: Router) {
     this.loginUserData = {};
    }
@@ -21,11 +20,10 @@ export class LoginComponent implements OnInit {
   loginUser(): void{
     this.success = this.auth.loginUser(this.loginUserData);
     this.success.then((user) => {
-    this.msg = user.message;
     if (user)
     {
       localStorage.setItem('token', user);
-      this.router.navigate(['/special']);
+      this.router.navigate(['/mytodos']);
     }
   });
   }

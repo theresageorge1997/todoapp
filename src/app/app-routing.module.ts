@@ -19,6 +19,7 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {path: '', loadChildren: () => import('./todos/todos.module').then(m => m.TodosModule), canActivate: [AuthGuard]},
+  {path: '', loadChildren: () => import('./todos/todos.module').then(m => m.TodosModule), canActivate: [AuthGuard]},
   {path: '', loadChildren: () => import('./todos/todos.module').then(m => m.TodosModule)},
   {path: '', loadChildren: () => import('./todos/todos.module').then(m => m.TodosModule)}
 ];

@@ -14,11 +14,11 @@ export class AuthService {
    }
   registerUser(user): any{
     const p = new Promise((resolve, reject) => {
-      this.http.post<{message: string, user}>('/todo/register', user)
+      this.http.post<{message: string}>('/todo/register', user)
       .subscribe(response => {
         if (response)
         {
-          resolve(response.user);
+          resolve(response.message);
         }
       });
     });
@@ -26,11 +26,11 @@ export class AuthService {
   }
   loginUser(user): any{
     const p = new Promise((resolve, reject) => {
-    this.http.post<{message: string, user}>('/todo/login', user)
+    this.http.post<{message: string}>('/todo/login', user)
     .subscribe(response => {
       if (response)
       {
-        resolve(response.user);
+        resolve(response.message);
       }
     });
   });

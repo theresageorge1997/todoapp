@@ -17,10 +17,14 @@ import { MatSidenavModule} from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { TodosRoutingModule } from './todos-routing.module';
 import {HttpClientModule} from '@angular/common/http';
+import { TodogridComponent } from './todogrid/todogrid.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDialogModule} from '@angular/material/dialog';
+import { TodoService } from './services/todo.service';
 
 
 @NgModule({
-  declarations: [TodoComponent, AboutComponent, ContactComponent, NavbarComponent],
+  declarations: [TodoComponent, AboutComponent, ContactComponent, NavbarComponent, TodogridComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -35,7 +39,10 @@ import {HttpClientModule} from '@angular/common/http';
     MatSidenavModule,
     MatToolbarModule,
     TodosRoutingModule,
-    HttpClientModule
-  ]
+    HttpClientModule,
+    MatGridListModule,
+    MatDialogModule
+  ],
+  providers: [TodoService]
 })
 export class TodosModule { }

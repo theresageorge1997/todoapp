@@ -4,8 +4,14 @@ import { TodoComponent } from './todo/todo.component';
 import { AuthGuard } from '../services/auth.guard';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { TodogridComponent } from './todogrid/todogrid.component';
 
 const routes: Routes = [
+  {
+    path: 'mytodos',
+    component: TodogridComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'special',
     component: TodoComponent,
