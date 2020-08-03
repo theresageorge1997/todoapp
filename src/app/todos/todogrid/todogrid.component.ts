@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { TodoService } from '../services/todo.service';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-todogrid',
@@ -8,9 +11,16 @@ import { Component, OnInit } from '@angular/core';
 export class TodogridComponent implements OnInit {
 show: boolean;
 listName: string;
-todos = [];
-  constructor() {
+listObj: any;
+lists: any;
+
+images;
+  constructor(private todo: TodoService,  private router: Router, private http: HttpClient) {
     this.show = false;
+    this.todo.getLists()
+    .subscribe(response => {
+      this.lists =  response.lists;
+    });
    }
 
   ngOnInit(): void {
@@ -18,23 +28,40 @@ todos = [];
 showForm(): void{
 this.show = true;
 }
-add(listName): void{
-  this.show = false;
-  this.todos.push(listName);
-  console.log(this.todos);
-}
-/* OnImgPicked(event: Event){
-  const file = (event.target as HTMLInputElement).files[0];
-  this.form.patchValue({image: file});
-  this.form.get('image').updateValueAndValidity();
-  const reader = new FileReader();
-  reader.onload = () => {
-    this.imagePreview = reader.result as string;
-  };
-  reader.readAsDataURL(file);
-} */
-/* navigate(todo): void
-{
 
-} */
+createNewList(listName): void{
+/*   const formData = new FormData();
+  formData.append('file', this.images);
+
+  this.http.post<any>('todo/file', formData).subscribe(
+    (res) => console.log(res),
+    (err) => console.log(err)
+  ); */
+  this.show = false;
+  this.listObj = {
+    name: listName,
+    image: 'img',
+    list: []
+  };
+  this.todo.addList(this.listObj)
+  .subscribe(response => {
+    console.log(response.insertedId);
+  });
+  this.todo.getLists()
+  .subscribe(response => {
+    this.lists = response.lists;
+    console.log(this.lists);
+   });
+}
+ navigate(list): void{
+   this.todo.set(list);
+   this.router.navigate(['/special']);
+ }
+
+ selectImage(event): void {
+  if (event.target.files.length > 0) {
+    const file = event.target.files[0];
+    this.images = file;
+  }
+}
 }

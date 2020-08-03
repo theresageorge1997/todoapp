@@ -14,9 +14,9 @@ export class AuthService {
    }
   registerUser(user): any{
     const p = new Promise((resolve, reject) => {
-      this.http.post<{message: string}>('/todo/register', user)
+      this.http.post<{message: string}>('/user/register', user)
       .subscribe(response => {
-        if (response)
+        if (response.message)
         {
           resolve(response.message);
         }
@@ -26,9 +26,9 @@ export class AuthService {
   }
   loginUser(user): any{
     const p = new Promise((resolve, reject) => {
-    this.http.post<{message: string}>('/todo/login', user)
+    this.http.post<{message: string}>('/user/login', user)
     .subscribe(response => {
-      if (response)
+      if (response.message)
       {
         resolve(response.message);
       }

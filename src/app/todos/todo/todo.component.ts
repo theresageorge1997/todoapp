@@ -21,21 +21,24 @@ export class TodoComponent implements OnInit {
 
   constructor(private todo: TodoService) {
   this.newTodo = '';
-  this.todo.getTodo()
-  .subscribe(response => {
-    this.todos =  response.todo;
-  });
+  this.todos =  this.todo.get().list;
   this.count = 0;
-  this.totalItems = 0;
-  this.listName = 'my todo list';
+  this.todos.forEach(element => {
+      if (element.completed)
+        {
+          this.count = this.count + 1;
+        }
+  });
+  this.totalItems = this.todos.length;
+  this.listName = this.todo.get().name;
   this.showEdit = false;
 }
 
   ngOnInit(): void {
   }
-  addTodo(event): void {
+  addTodo(newTodo): void {
     this.todoObj = {
-      newTodo: this.newTodo,
+      newTodo,
       completed: false
     };
     this.todo.addTodo(this.todoObj)
@@ -43,8 +46,7 @@ export class TodoComponent implements OnInit {
       this.addSuccess = response.status;
       console.log(this.addSuccess);
     });
-    if (this.addSuccess)
-    {
+
     this.todo.getTodo()
     .subscribe(response => {
       this.todos = response.todo;
@@ -52,46 +54,40 @@ export class TodoComponent implements OnInit {
       this.newTodo = '';
       this.totalItems = this.todos.length;
      });
-    }
   }
 
-  deleteTodo(id): void {
-    this.todo.deleteTodo(id)
+  deleteTodo(todo): void {
+    this.todo.deleteTodo(todo)
     .subscribe(response => {
       this.deleteSuccess = response.status;
       console.log(this.deleteSuccess);
     });
-    if (this.deleteSuccess)
-    {
     this.todo.getTodo()
     .subscribe(response => {
       this.todos = response.todo;
       this.totalItems = this.todos.length;
       console.log(this.todos);
      });
-    }
   }
 
-  counter(todo): void{
-    this.count = 0;
+  counter(todo, index): void{
     this.todo.updateTodo(todo)
     .subscribe(response => {
       this.updateSuccess = response.status;
       console.log(this.updateSuccess);
     });
-    if (this.updateSuccess)
-    {
     this.todo.getTodo()
        .subscribe((response) => {
         this.todos = response.todo;
-        for (let i = (this.todos.length - 1); i > -1; i--) {
-          if (this.todos[i].completed) {
-            this.count = this.count + 1;
-          }
-        }
+        this.count = 0;
+        this.todos.forEach(element => {
+          if (element.completed)
+            {
+              this.count = this.count + 1;
+            }
+      });
         console.log(this.todos);
        });
-      }
   }
   show(): void{
     this.showEdit = true;

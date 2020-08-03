@@ -25,14 +25,14 @@
             <div fxLayout="row" fxFlexFill>
              <div fxFlex fxLayoutAlign="start center"><mat-checkbox  [(ngModel)]="todo.completed" color="primary" (change)="counter(todo)"></mat-checkbox></div>
              <div fxFlex fxLayoutAlign="center center"  [ngClass]="{'checked1': todo.completed}">{{ todo.newTodo }}</div>
-             <div fxFlex fxLayoutAlign="end center"  (click)="deleteTodo(todo._id)"><mat-icon matListIcon>delete_outline</mat-icon></div>
+             <div fxFlex fxLayoutAlign="end center"  (click)="deleteTodo(todo)"><mat-icon matListIcon>delete_outline</mat-icon></div>
             </div>
            </mat-list-item>
          </mat-list>
       </div>
 
       <div fxLayoutAlign="center center">
-         <form (submit)="addTodo($event)">
+         <form (submit)="addTodo(newTodo)">
             <mat-form-field>
             <input type="text" placeholder="Enter to do item" [(ngModel)]="newTodo"  name="newTodo" matInput /> 
             </mat-form-field>
