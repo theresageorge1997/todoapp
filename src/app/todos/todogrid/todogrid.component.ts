@@ -13,7 +13,7 @@ show: boolean;
 listName: string;
 listObj: any;
 lists: any;
-
+imageName: any;
 images;
   constructor(private todo: TodoService,  private router: Router, private http: HttpClient) {
     this.show = false;
@@ -30,28 +30,26 @@ this.show = true;
 }
 
 createNewList(listName): void{
-/*   const formData = new FormData();
+  const formData = new FormData();
   formData.append('file', this.images);
-
-  this.http.post<any>('todo/file', formData).subscribe(
-    (res) => console.log(res),
-    (err) => console.log(err)
-  ); */
-  this.show = false;
-  this.listObj = {
-    name: listName,
-    image: 'img',
+  this.todo.uploadFile(formData).then((file) => {
+    this.show = false;
+    this.listObj = {
+    name: this.listName,
+    image: 'assets/images/' + file,
     list: []
   };
-  this.todo.addList(this.listObj)
+
+    this.todo.addList(this.listObj)
   .subscribe(response => {
     console.log(response.insertedId);
   });
-  this.todo.getLists()
+    this.todo.getLists()
   .subscribe(response => {
     this.lists = response.lists;
     console.log(this.lists);
    });
+  });
 }
  navigate(list): void{
    this.todo.set(list);

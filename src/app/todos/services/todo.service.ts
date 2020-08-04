@@ -36,4 +36,18 @@ export class TodoService {
   get(): any{
     return this.navigatedList;
   }
+
+  uploadFile(formData): any{
+    const p = new Promise((resolve, reject) => {
+      this.http.post<any>('todo/file', formData)
+      .subscribe(response => {
+        if (response.file)
+        {
+          resolve(response.file);
+        }
+      });
+    });
+    return p;
+  }
+
 }

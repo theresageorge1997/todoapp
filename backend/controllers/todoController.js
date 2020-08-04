@@ -81,7 +81,7 @@ router.put('/update/:id',(req,res) => {
     });
 });
 
-let upload = multer({ dest: 'uploads/' })
+let upload = multer({ dest: 'src/assets/images/' })
 router.post('/file', upload.single('file'), (req, res, next) => {
     const file = req.file;
     console.log(file.filename);
@@ -90,7 +90,7 @@ router.post('/file', upload.single('file'), (req, res, next) => {
       error.httpStatusCode = 400
       return next(error)
     }
-      res.send(file);
+      return res.json({file:file.filename});
   })
 
 module.exports = router;

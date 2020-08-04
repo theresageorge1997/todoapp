@@ -1,34 +1,24 @@
 <app-navbar></app-navbar>
 <body>
 <button fxLayoutAlign="center center" mat-raised-button color="primary" (click)="showForm()">create new todo list</button>
-  <div [hidden]="!show" fxLayout="row" >
+  <div [hidden]="!show" fxLayout="column" fxLayoutAlign="center start">
     <mat-form-field>
-    <input type="text"  [(ngModel)]="listName"  name="listName" matInput/>
-    <!-- <input type="file" name="image" (change)="selectImage($event)" /> -->
- </mat-form-field>
-    <mat-icon (click)="createNewList(listName)">done</mat-icon>
+    <input type="text" placeholder="Enter todo list name" [(ngModel)]="listName"  name="listName" matInput/>
+    </mat-form-field>
+    <input type="file" name="image" (change)="selectImage($event)" />
+    <br>
+    <button mat-raised-button color="primary" (click)="createNewList(listName)">create</button>
  </div>
  <br>
 <mat-grid-list cols="4" rowHeight="1:1" gutterSize="10px">
     <mat-grid-tile (click)="navigate(list)" *ngFor="let list of lists; let i=index" fxLayout="column">
 
 
-        <img src="assets/images/logo1.jpg"/>
+        <img [src] = "list.image" />
         <mat-grid-tile-footer fxLayoutAlign="center center">{{list.name}}</mat-grid-tile-footer>
 
 
     </mat-grid-tile>
   </mat-grid-list>
 
-<!--   <div style="text-align: center">
-    <form>      
-      <div>
-        <input type="file" name="image" (change)="selectImage($event)" />
-      </div>
-      <br>
-      <div>
-        <button type="submit" (click)="onSubmit()">Upload</button>
-      </div>
-    </form>
-  </div> -->
 </body>
